@@ -23,6 +23,7 @@ export function login(type, user) {
       .then((response) => {
         const decodedToken = decode(response.jwt);
         const { sub } = decodedToken;
+        localStorage.setItem('token', response.jwt);
         localStorage.setItem('userId', sub);
         localStorage.setItem('userType', sub.substr(0, 4))
         localStorage.setItem('isLoggedIn', true);
@@ -41,6 +42,7 @@ export function signup(type, user) {
       .then((response) => {
         const decodedToken = decode(response.message.jwt);
         const { sub } = decodedToken;
+        localStorage.setItem('token', response.jwt);
         localStorage.setItem('userId', sub);
         localStorage.setItem('userType', sub.substr(0, 4))
         localStorage.setItem('isLoggedIn', true);

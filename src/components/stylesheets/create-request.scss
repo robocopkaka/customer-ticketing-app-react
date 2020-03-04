@@ -1,0 +1,36 @@
+@import "functions/px_to_rem";
+#new-request {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 4.375rem);
+  background-color: #111118;
+  width: 100vw;
+
+  #request-form {
+    background-color: #FFFFFF;
+    border-radius: px-to-rem(8px);
+    padding-top: px-to-rem(20px);
+    height: 55vh;
+    width: 40vw;
+
+    label {
+      float: left;
+      font-weight: 500;
+    }
+    .form-group {
+      padding: 0 px-to-rem(20px);
+    }
+
+    .form-control:focus {
+      border-color: #4A2545;
+    }
+
+    .button-group {
+      .btn {
+        background-color: #4A2545;
+        color: #FFFFFF;
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@ class Navbar extends Component {
                 <Link to="/" className="nav-link">Home</Link>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link">Add tickets</a>
+                <Link to="/create-requests" className="nav-link">Add tickets</Link>
               </li>
               <li className="nav-item">
                 <a href="#" className="nav-link">View tickets</a>
