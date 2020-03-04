@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
 import history from "../../history";
@@ -28,12 +29,13 @@ class CustomerLogin extends Component {
     const { email, password } = this.state;
     const customer = { auth: { email, password } };
     this.props.actions.login('customers', customer)
-      .then(() => {
-        history.push('/')
-      })
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    if (this.props.authenticated) {
+      return <Redirect to={from} />
+    }
     return (
       <LoginForm login={this.login} email={this.email} password={this.password} handleChange={this.handleChange} />
     );
@@ -46,5 +48,11 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  };
+}
 
-export default connect(null, mapDispatchToProps)(CustomerLogin);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerLogin);
