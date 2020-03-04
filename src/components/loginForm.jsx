@@ -30,7 +30,6 @@ const LoginForm = ({ email, password, login, handleChange }) => (
         <button className="btn" type="submit">Login</button>
       </div>
     </form>
-    <p>m</p>
   </div>
 );
 

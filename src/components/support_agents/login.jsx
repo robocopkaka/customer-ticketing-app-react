@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
+import history from "../../history";
 
 class SupportAgentLogin extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ class SupportAgentLogin extends Component {
       password: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.login = this.login.bind(this);
+    this.login = this.login.bind(this)
+      .then(() => {
+        history.push('/')
+      });
   }
 
   handleChange(event) {

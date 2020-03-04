@@ -1,5 +1,5 @@
 @import "functions/px_to_rem";
-.input-forms {
+#signup {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,19 +7,20 @@
   background-color: #111118;
   width: 100vw;
 
-  #login-form {
+  #signup-form {
     background-color: #FFFFFF;
     border-radius: px-to-rem(8px);
-    padding-top: px-to-rem(20px);
-    height: 40vh;
+    padding: px-to-rem(20px) 0;
+    height: 76vh;
     width: 40vw;
+
+    .form-group {
+      padding: 0 px-to-rem(20px);
+    }
 
     label {
       float: left;
       font-weight: 500;
-    }
-    .form-group {
-      padding: 0 px-to-rem(20px);
     }
 
     .form-control:focus {
@@ -27,6 +28,7 @@
     }
 
     .button-group {
+      padding-bottom: px-to-rem(20px);
       .btn {
         background-color: #4A2545;
         color: #FFFFFF;

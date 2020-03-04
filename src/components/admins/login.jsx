@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
+import history from "../../history";
 
 class AdminLogin extends Component {
   constructor(props) {
@@ -25,8 +26,11 @@ class AdminLogin extends Component {
   login(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    const customer = { auth: { email, password } };
-    this.props.actions.login('admins', customer)
+    const user = { auth: { email, password } };
+    this.props.actions.login('admins', user)
+      .then(() => {
+        history.push('/')
+      });
   }
 
   render() {
