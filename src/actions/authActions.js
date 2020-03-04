@@ -13,6 +13,10 @@ export function loginFailure() {
   return { type: 'LOGIN_FAILURE' }
 }
 
+export function signupFailure() {
+  return { type: 'SIGNUP_FAILURE' }
+}
+
 export function login(type, user) {
   return (dispatch) => {
     return AuthApi.login(type, user)
@@ -29,4 +33,22 @@ export function login(type, user) {
         dispatch(loginFailure());
       })
   }
+}
+
+export function signup(type, user) {
+  return (dispatch) => {
+    return AuthApi.signup(type, user)
+      .then((response) => {
+        const decodedToken = decode(response.message.jwt);
+        const { sub } = decodedToken;
+        localStorage.setItem('userId', sub);
+        localStorage.setItem('userType', sub.substr(0, 4))
+        localStorage.setItem('isLoggedIn', true);
+        dispatch(signupSuccess(user));
+      })
+      .catch(() => {
+        localStorage.setItem('isLoggedIn', false);
+        dispatch(signupFailure());
+      })
+  };
 }
