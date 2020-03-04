@@ -37,7 +37,7 @@ class Home extends Component {
           <div id="image-div">
             <img
               src={img}
-              alt="Image credit: Managed by Q image"
+              alt="Image credit: Managed by Q"
               id="managed-image"
             />
           </div>

@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-class CustomerAuthApi {
+class AuthApi {
   static login(type, customer) {
-    console.log(customer)
     return axios.post(`http://localhost:3001/${type}/login`, customer, {
       headers: {
         'Content-Type': 'application/json'
@@ -15,4 +14,4 @@ class CustomerAuthApi {
   }
 }
 
-export default CustomerAuthApi;
+export default AuthApi;

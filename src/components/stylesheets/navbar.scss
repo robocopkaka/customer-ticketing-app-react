@@ -29,14 +29,15 @@ $navbar-background-color: #4A2545;
           }
         }
       }
-      .navbar-end {
-        .buttons {
-          padding: 15px 0;
-          .is-primary {
-            background-color: #A288A6;
-          }
+      .buttons {
+        padding: px-to-rem(15px) px-to-rem(20px);
+        .btn {
+          margin-right: px-to-rem(10px);
         }
-      }
+        .is-primary {
+          background-color: #A288A6;
+        }
+        }
     }
   }
 }

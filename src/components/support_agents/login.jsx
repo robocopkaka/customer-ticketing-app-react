@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
-import * as customerAuthActions from '../../actions/customerAuthActions';
-import LoginForm from "../login";
+import * as customerAuthActions from '../../actions/authActions';
+import LoginForm from "../loginForm";
 
 class SupportAgentLogin extends Component {
   constructor(props) {
