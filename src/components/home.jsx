@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import './stylesheets/home.scss';
 import img from '../managed_by_q.png'
+import { Link } from "react-router-dom";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="container">
@@ -24,11 +21,11 @@ class Home extends Component {
             <div className="container">
               <div className="button-set">
                 <button id="create">
-                  <a href="#">Create New Ticket</a>
+                  <Link to="/create-requests">Create New Ticket</Link>
                 </button>
 
                 <button id="view">
-                  <a href="#">View all tickets</a>
+                  <Link to="/fetch-requests">View all tickets</Link>
                 </button>
               </div>
             </div>
@@ -37,7 +34,7 @@ class Home extends Component {
           <div id="image-div">
             <img
               src={img}
-              alt="Image credit: Managed by Q"
+              alt="credit: Managed by Q"
               id="managed-image"
             />
           </div>

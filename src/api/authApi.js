@@ -14,7 +14,6 @@ class AuthApi {
   }
 
   static signup(type, user) {
-    console.log(user)
     return axios.post(`http://localhost:3001/${type}`, user, {
       headers: {
         'Content-Type': 'application/json'

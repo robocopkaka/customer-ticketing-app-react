@@ -14,9 +14,6 @@ class SupportAgentLogin extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.login = this.login.bind(this)
-      .then(() => {
-        history.push('/')
-      });
   }
 
   handleChange(event) {
@@ -31,6 +28,9 @@ class SupportAgentLogin extends Component {
     const { email, password } = this.state;
     const customer = { auth: { email, password } };
     this.props.actions.login('support_agents', customer)
+      .then(() => {
+        history.push('/')
+      });
   }
 
   render() {
