@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
-import history from "../../history";
 
 class CustomerLogin extends Component {
   constructor(props) {

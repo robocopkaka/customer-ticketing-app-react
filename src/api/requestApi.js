@@ -13,6 +13,16 @@ class RequestApi {
         throw error;
       })
   }
+
+  static fetchRequests(type, query) {
+    return axios.get(`http://localhost:3001/${type}/${localStorage.userId}/support_requests?query=${query || ""}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+      .then(response => response.data);
+  }
 }
 
 export default RequestApi;

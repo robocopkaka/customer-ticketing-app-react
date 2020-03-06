@@ -40,7 +40,7 @@ export function signup(type, user) {
   return (dispatch) => {
     return AuthApi.signup(type, user)
       .then((response) => {
-        const decodedToken = decode(response.message.jwt);
+        const decodedToken = decode(response.extra.jwt);
         const { sub } = decodedToken;
         localStorage.setItem('token', response.jwt);
         localStorage.setItem('userId', sub);

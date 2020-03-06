@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 
 class Navbar extends Component {
   render() {
-    console.log(this.props);
     return (
       <div id="navbar-section">
         <nav className="navbar navbar-expand-lg">
@@ -24,7 +23,7 @@ class Navbar extends Component {
                 <Link to="/create-requests" className="nav-link">Add tickets</Link>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link">View tickets</a>
+                <Link to="/fetch-requests" className="nav-link">View tickets</Link>
               </li>
             </ul>
           </div>
@@ -58,7 +57,6 @@ class Navbar extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     authenticated: state.auth.authenticated
   }

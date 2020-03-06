@@ -7,6 +7,8 @@ export default {
   request: {
     subject: '',
     description: '',
-    message: ''
+    message: '',
+    requests: [],
+    extra: {}
   }
 };
