@@ -29,7 +29,7 @@ class RequestComments extends Component {
 
   get customerCanPost() {
     const { comments } = this.props;
-    const userType = localStorage.getItem('userType')
+    const userType = localStorage.getItem('userType');
 
     if (userType === 'cust' && comments.length === 0) {
       return true;

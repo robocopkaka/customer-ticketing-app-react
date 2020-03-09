@@ -36,6 +36,19 @@ class RequestApi {
         throw error;
       });
   }
+
+  static resolve(id) {
+    return axios.patch(`/support_requests/${id}/resolve`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+      .then(response => response.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
 }
 
 export default RequestApi;

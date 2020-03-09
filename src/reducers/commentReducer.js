@@ -19,7 +19,6 @@ export default function commentReducer(state=initialState.comment, action) {
     case 'FETCH_COMMENTS_SUCCESS':
       newState = update(state, {
         comments: { $set: action.data.comments },
-        message: { $set: 'Comment could not created' },
       });
       return newState;
     default:

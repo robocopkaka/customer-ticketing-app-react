@@ -16,6 +16,10 @@ export function fetchOneRequestSuccess(data) {
   return { type: 'FETCH_ONE_REQUEST_SUCCESS', data }
 }
 
+export function resolveRequestSuccess() {
+  return { type: 'RESOLVE_REQUEST_SUCCESS' }
+}
+
 export function fetchOneRequestFailure() {
   return { type: 'FETCH_ONE_REQUEST_FAILURE' }
 }
@@ -24,7 +28,8 @@ export function create(request) {
   return (dispatch) => {
     return RequestApi.create(request)
       .then((response) => {
-        dispatch(createRequestSuccess(request));
+        dispatch(createRequestSuccess(response));
+        return response
       })
       .catch((error) => {
         dispatch(createRequestFailure())
@@ -49,6 +54,15 @@ export function fetchOne(id) {
       })
       .catch(() => {
         dispatch(fetchOneRequestFailure());
+      });
+  }
+}
+
+export function resolve(id) {
+  return (dispatch) => {
+    return RequestApi.resolve(id)
+      .then((response) => {
+        dispatch(resolveRequestSuccess())
       });
   }
 }

@@ -17,5 +17,8 @@ export default {
     comment: {},
     body: '',
     message: '',
+  },
+  supportAgent: {
+    supportAgents: []
   }
 };

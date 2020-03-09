@@ -49,7 +49,6 @@ class SupportAgentRequests extends Component {
 
   render() {
     const { requests, extra } = this.props;
-    console.log(extra)
     return (
       <Fragment>
         <div id="all-requests">

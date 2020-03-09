@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-const RequestDescription = ({ request }) => (
+const RequestDescription = ({ request, resolveRequest, userType }) => (
   <Fragment>
     <div>Placeholder</div>
     <div className="card">
@@ -13,6 +13,16 @@ const RequestDescription = ({ request }) => (
         <br/>
         <h5 className="header">Assigned to</h5>
         <div>{request.assignee_id || 'N/A'}</div>
+        <br />
+        { userType !== 'supp' ? (
+          ""
+        ) : (
+          <div className="button-group">
+            <button className="btn" type="submit" disabled={request.resolved_at} onClick={resolveRequest}>
+              Resolve
+            </button>
+          </div>
+        )}
       </div>
     </div>
   </Fragment>
