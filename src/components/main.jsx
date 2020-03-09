@@ -8,6 +8,7 @@ import CustomerSignup from "./customers/signup";
 import CreateRequest from "./customers/createRequest";
 import CustomerRequests from "./customers/requests";
 import SupportAgentRequests from "./support_agents/requests";
+import SingleRequest from "./singleRequest";
 
 const CustomerRoute = ({ component: Component, ...rest }) => (
    <Route {...rest} render={(props) => (
@@ -31,6 +32,17 @@ const SupportAgentRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
+const AuthenticatedRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    localStorage.getItem('userType')
+      ? <Component {...props} />
+      : <Redirect to={{
+        pathname: "/customers/login",
+        state: { from: props.location }
+      }} />
+  )} />
+);
+
 const Main = () => (
   <main>
     <Switch>
@@ -40,8 +52,9 @@ const Main = () => (
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />
       <CustomerRoute exact path="/create-requests" component={CreateRequest} />
-      <CustomerRoute exact path="/fetch-requests" component={CustomerRequests} />
+      <CustomerRoute exact path="/requests" component={CustomerRequests} />
       <SupportAgentRoute exact path="/support-agents/requests" component={SupportAgentRequests} />
+      <AuthenticatedRoute exact path="/requests/:id" component={SingleRequest} />
     </Switch>
   </main>
 );

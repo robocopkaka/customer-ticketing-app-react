@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import RequestForm from "./requestForm";
-import * as actions from "../../actions/requestActions";
+import * as actions from "../../actions/requestActions.js";
 import history from "../../history";
 import '../stylesheets/create-request.scss';
 

@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "./defaultConfig";
 
 class RequestApi {
   static create(request) {
-    return axios.post(`http://localhost:3001/support_requests`, request, {
+    return axios.post('/support_requests', request, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
@@ -15,13 +15,39 @@ class RequestApi {
   }
 
   static fetchRequests(type, query) {
-    return axios.get(`http://localhost:3001/${type}/${localStorage.userId}/support_requests?query=${query || ""}`, {
+    return axios.get(`/${type}/${localStorage.userId}/support_requests?query=${query || ""}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
       }
     })
       .then(response => response.data);
+  }
+
+  static fetchOne(id) {
+    return axios.get(`/support_requests/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+      .then(response => response.data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  static resolve(id) {
+    return axios.patch(`/support_requests/${id}/resolve`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+      .then(response => response.data)
+      .catch((error) => {
+        throw error;
+      });
   }
 }
 

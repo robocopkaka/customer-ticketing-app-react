@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import qs from "query-string";
-import * as actions from "../../actions/requestActions";
+import * as actions from "../../actions/requestActions.js";
 import RequestItem from "../requestItem";
 import "../stylesheets/requests.scss";
 import RequestsInfo from "../requestsInfo.jsx";
@@ -49,7 +49,6 @@ class SupportAgentRequests extends Component {
 
   render() {
     const { requests, extra } = this.props;
-    console.log(extra)
     return (
       <Fragment>
         <div id="all-requests">
