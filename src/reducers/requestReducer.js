@@ -22,6 +22,16 @@ export default function requestReducer(state=initialState.request, action) {
         extra: { $set: action.data.extra }
       });
       return newState;
+    case 'FETCH_ONE_REQUEST_SUCCESS':
+      newState = update(state, {
+        request: { $set: action.data.support_request },
+      });
+      return newState;
+    case 'FETCH_ONE_REQUEST_FAILURE':
+      newState = update(state, {
+        message: { $set: 'Request not found' },
+      });
+      return newState;
     default:
       return state;
   }

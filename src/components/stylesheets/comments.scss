@@ -1,0 +1,10 @@
+@import "functions/px_to_rem";
+
+#comments {
+  background: #FFFFFF;
+  width: 40vw;
+  padding-top: px-to-rem(30px);
+  #request-comments {
+    //height: auto;
+  }
+}

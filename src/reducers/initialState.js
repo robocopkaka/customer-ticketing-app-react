@@ -9,6 +9,13 @@ export default {
     description: '',
     message: '',
     requests: [],
-    extra: {}
+    extra: {},
+    request: {}
+  },
+  comment: {
+    comments: [],
+    comment: {},
+    body: '',
+    message: '',
   }
 };

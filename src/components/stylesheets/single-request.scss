@@ -1,0 +1,81 @@
+@import "functions/px_to_rem";
+
+#request-description-section {
+  background-color: #111118;
+  height: calc(100vh - 4.375rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  #description {
+    .card {
+      width: 35vw;
+      height: auto;
+
+      .card-body {
+        text-align: left;
+        .header {
+          font-size: px-to-rem(20px);
+          font-weight: bolder;
+        }
+        //display: flex;
+        //flex-direction: column;
+        //align-items: flex-start;
+      }
+    }
+  }
+
+  #comments {
+    background: #FFFFFF;
+    width: 40vw;
+    max-height: 80vh;
+    margin-top: px-to-rem(25px);
+    padding-top: px-to-rem(25px);
+    border-radius: px-to-rem(8px);
+
+    #comment-form {
+      label {
+        float: left;
+        font-weight: 700;
+      }
+      .form-group {
+        padding: 0 px-to-rem(40px);
+      }
+
+      .form-control:focus {
+        border-color: #4A2545;
+      }
+
+      .button-group {
+        .btn {
+          background-color: #4A2545;
+          color: #FFFFFF;
+        }
+      }
+    }
+
+    #comments-list {
+      padding: px-to-rem(20px) px-to-rem(20px);
+      overflow-y: scroll;
+      height: 35vh;
+      text-align: left;
+
+      #commenter-name {
+        #name {
+          font-size: px-to-rem(15px);
+          font-weight: bolder;
+          padding-right: px-to-rem(8px);
+        }
+        #created-at {
+          font-size: px-to-rem(10px);
+          font-weight: 400;
+        }
+        #comment {
+          word-wrap: break-word;
+          text-justify: auto;
+        }
+      }
+      //max-height: 50vh;
+    }
+  }
+}

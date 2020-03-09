@@ -12,6 +12,14 @@ export function fetchRequestsSuccess(data) {
   return { type: 'FETCH_REQUESTS_SUCCESS', data }
 }
 
+export function fetchOneRequestSuccess(data) {
+  return { type: 'FETCH_ONE_REQUEST_SUCCESS', data }
+}
+
+export function fetchOneRequestFailure() {
+  return { type: 'FETCH_ONE_REQUEST_FAILURE' }
+}
+
 export function create(request) {
   return (dispatch) => {
     return RequestApi.create(request)
@@ -31,4 +39,16 @@ export function fetchRequests(type, query) {
         dispatch(fetchRequestsSuccess(response))
       });
   };
+}
+
+export function fetchOne(id) {
+  return (dispatch) => {
+    return RequestApi.fetchOne(id)
+      .then((response) => {
+        dispatch(fetchOneRequestSuccess(response.data))
+      })
+      .catch(() => {
+        dispatch(fetchOneRequestFailure());
+      });
+  }
 }
