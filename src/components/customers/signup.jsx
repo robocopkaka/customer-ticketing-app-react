@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as authActions from '../../actions/authActions';
 import history from "../../history";
 import SignupForm from "../signupForm";
+import signupFormValidator from "../../helpers/signupFormValidator";
 
 class CustomerSignup extends Component {
    constructor(props) {
@@ -13,6 +14,10 @@ class CustomerSignup extends Component {
        email: '',
        password: '',
        passwordConfirmation: '',
+       errorMessages: {
+         name: '', email: '', password: '', passwordConfirmation: '',
+       },
+       valid: false
      };
      this.handleChange = this.handleChange.bind(this);
      this.signup = this.signup.bind(this);
@@ -35,20 +40,30 @@ class CustomerSignup extends Component {
        phone_number: phoneNumber,
        password_confirmation: passwordConfirmation
      };
-     this.props.actions.signup('customers', user)
-       .then(() => {
-         history.push('/')
-       })
+     this.setState(signupFormValidator);
+     if (this.validForm) {
+       this.props.actions.signup('customers', user)
+         .then(() => {
+           history.push('/')
+         })
+     }
+   }
+
+   get validForm() {
+     return signupFormValidator(this.state).valid
    }
 
    render() {
-     const { name, email, password, passwordConfirmation } = this.state;
+     const {
+       name, email, password, passwordConfirmation, errorMessages
+     } = this.state;
      return (
       <SignupForm
         name={name}
         email={email}
         password={password}
         passwordConfirmation={passwordConfirmation}
+        errorMessages={errorMessages}
         handleChange={this.handleChange}
         signup={this.signup}
       />

@@ -5,13 +5,15 @@ import RequestForm from "./requestForm";
 import * as actions from "../../actions/requestActions.js";
 import history from "../../history";
 import '../stylesheets/create-request.scss';
+import requestFormValidator from "../../helpers/requestFormValidator";
 
 class CreateRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
       subject: '',
-      description: ''
+      description: '',
+      errorMessages: { subject: '', description: '' }
     };
     this.handleChange = this.handleChange.bind(this);
     this.create = this.create.bind(this);
@@ -28,18 +30,26 @@ class CreateRequest extends Component {
     event.preventDefault();
     const { subject, description } = this.state;
     const request = { subject, description };
-    this.props.actions.create(request)
-      .then(() => {
-        history.push('/');
-      })
+    this.setState(requestFormValidator);
+    if (this.validForm) {
+      this.props.actions.create(request)
+        .then(() => {
+          history.push('/');
+        })
+    }
+  }
+
+  get validForm() {
+    return requestFormValidator(this.state).valid;
   }
 
   render() {
-    const { subject, description } = this.state;
+    const { subject, description, errorMessages } = this.state;
     return (
       <RequestForm
         subject={subject}
         description={description}
+        errorMessages={errorMessages}
         handleChange={this.handleChange}
         create={this.create}
       />

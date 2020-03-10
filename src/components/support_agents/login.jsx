@@ -4,13 +4,18 @@ import { connect } from 'react-redux';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
 import history from "../../history";
+import loginFormValidator from "../../helpers/loginValidator";
 
 class SupportAgentLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessages: {
+        password: '', email: ''
+      },
+      valid: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.login = this.login.bind(this)
@@ -27,19 +32,28 @@ class SupportAgentLogin extends Component {
     event.preventDefault();
     const { email, password } = this.state;
     const customer = { auth: { email, password } };
-    this.props.actions.login('support_agents', customer)
-      .then(() => {
-        history.push('/')
-      });
+    this.setState(loginFormValidator);
+    if (this.validForm) {
+      this.props.actions.login('support_agents', customer)
+        .then(() => {
+          history.push('/')
+        });
+    }
+  }
+
+  get validForm() {
+    return loginFormValidator(this.state).valid;
   }
 
   render() {
+    const { email, password, errorMessages } = this.state;
     return (
       <LoginForm
         login={this.login}
-        email={this.email}
-        password={this.password}
+        email={email}
+        password={password}
         handleChange={this.handleChange}
+        errorMessages={errorMessages}
       />
     );
   }
