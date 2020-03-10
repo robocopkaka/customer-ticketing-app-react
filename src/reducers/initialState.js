@@ -19,6 +19,7 @@ export default {
     message: '',
   },
   supportAgent: {
-    supportAgents: []
+    supportAgents: [],
+    message: ''
   }
 };

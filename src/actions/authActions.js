@@ -54,3 +54,12 @@ export function signup(type, user) {
       })
   };
 }
+
+export function logout() {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userType');
+    localStorage.setItem('isLoggedIn', false);
+  }
+}

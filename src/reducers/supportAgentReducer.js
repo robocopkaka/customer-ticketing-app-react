@@ -10,6 +10,11 @@ export default function supportAgentReducer(state=initialState.supportAgent, act
         supportAgents: { $set: action.data.support_agents },
       });
       return newState;
+    case 'ASSIGN_REQUEST_SUCCESS':
+      newState = update(state, {
+        message: { $set: 'Successfully assigned to agent' },
+      });
+      return newState;
     default:
       return state;
   }
