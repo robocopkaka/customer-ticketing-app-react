@@ -4,13 +4,18 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as customerAuthActions from '../../actions/authActions';
 import LoginForm from "../loginForm";
+import loginFormValidator from "../../helpers/loginValidator";
 
 class CustomerLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessages: {
+        password: '', email: ''
+      },
+      valid: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.login = this.login.bind(this);
@@ -27,16 +32,30 @@ class CustomerLogin extends Component {
     event.preventDefault();
     const { email, password } = this.state;
     const customer = { auth: { email, password } };
-    this.props.actions.login('customers', customer)
+    this.setState(loginFormValidator);
+    if (this.validForm) {
+      this.props.actions.login('customers', customer)
+    }
+  }
+
+  get validForm() {
+    return loginFormValidator(this.state).valid;
   }
 
   render() {
+    const { email, password, errorMessages } = this.state;
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     if (this.props.authenticated) {
       return <Redirect to={from} />
     }
     return (
-      <LoginForm login={this.login} email={this.email} password={this.password} handleChange={this.handleChange} />
+      <LoginForm
+        login={this.login}
+        email={email}
+        password={password}
+        handleChange={this.handleChange}
+        errorMessages={errorMessages}
+      />
     );
   }
 }

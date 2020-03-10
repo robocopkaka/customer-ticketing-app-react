@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/commentActions";
 import CommentInput from "./commentInput";
 import CommentsList from "./commentsList";
-// import '../stylesheets/comments.scss';
+import commentFormValidator from "../../helpers/commentFormValidator";
 
 class RequestComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
       body: '',
+      errorMessages: { body: '' }
     };
     this.handleChange = this.handleChange.bind(this);
     this.save = this.save.bind(this)
@@ -40,26 +41,35 @@ class RequestComments extends Component {
     }
   }
 
+  get validForm() {
+    return commentFormValidator(this.state).valid;
+  }
+
   save(event) {
     event.preventDefault();
     const { id } = this.props;
     const { body } = this.state;
     const req = { body };
-    this.props.actions.create(id, req)
-      .then(() => {
-        this.setState({ body: '' })
-      });
-    this.props.actions.fetchComments(this.props.id)
+    this.setState(commentFormValidator);
+    if (this.validForm) {
+      this.props.actions.create(id, req)
+        .then(() => {
+          this.setState({ body: '' })
+        });
+      this.props.actions.fetchComments(this.props.id)
+    }
   }
 
   render() {
     const { comments } = this.props;
+    const { body, errorMessages } = this.state;
     return (
       <Fragment>
         <div id="request-comments">
           <h3>Comments</h3>
           <CommentInput
-            body={this.body}
+            body={body}
+            errorMessages={errorMessages}
             handleChange={this.handleChange}
             save={this.save}
             customerCanPost={this.customerCanPost}
