@@ -52,7 +52,7 @@ const Main = () => (
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />
       <CustomerRoute exact path="/create-requests" component={CreateRequest} />
-      <CustomerRoute exact path="/requests" component={CustomerRequests} />
+      <AuthenticatedRoute exact path="/requests" component={CustomerRequests} />
       <SupportAgentRoute exact path="/support-agents/requests" component={SupportAgentRequests} />
       <AuthenticatedRoute exact path="/requests/:id" component={SingleRequest} />
     </Switch>

@@ -2,8 +2,21 @@ import React, { Component, Fragment } from "react";
 import { connect } from 'react-redux';
 import './stylesheets/navbar.scss';
 import {Link} from "react-router-dom";
+import { bindActionCreators } from "redux";
+import * as actions from '../actions/authActions';
+import history from "../history";
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props)
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(event) {
+    event.preventDefault();
+    this.props.actions.logout()
+    history.push('/');
+  }
   render() {
     return (
       <div id="navbar-section">
@@ -23,15 +36,15 @@ class Navbar extends Component {
                 <Link to="/create-requests" className="nav-link">Add tickets</Link>
               </li>
               <li className="nav-item">
-                <Link to="/fetch-requests" className="nav-link">View tickets</Link>
+                <Link to="/requests" className="nav-link">View tickets</Link>
               </li>
             </ul>
           </div>
 
           <div className="buttons">
-            {this.props.isLoggedIn ? (
+            {localStorage.getItem('isLoggedIn') ? (
               <Link to="#">
-                <button className="btn btn-light">
+                <button className="btn btn-light" onClick={this.logout}>
                   Logout
                 </button>
               </Link>
@@ -42,7 +55,7 @@ class Navbar extends Component {
                     Login
                   </button>
                 </Link>
-                <Link to="#">
+                <Link to="/signup">
                   <button className="btn btn-light">
                     Signup
                   </button>
@@ -62,4 +75,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Navbar);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
