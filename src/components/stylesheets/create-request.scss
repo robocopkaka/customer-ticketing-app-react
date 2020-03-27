@@ -1,4 +1,5 @@
 @import "functions/px_to_rem";
+@import "mixins/media_query_mixins";
 #new-request {
   display: flex;
   align-items: center;
@@ -10,13 +11,16 @@
   #request-form {
     background-color: #FFFFFF;
     border-radius: px-to-rem(8px);
-    padding-top: px-to-rem(20px);
-    height: 55vh;
+    padding: px-to-rem(20px) px-to-rem(20px) 0 px-to-rem(20px);
+    height: 62vh;
     width: 40vw;
 
     label {
       float: left;
       font-weight: 500;
+    }
+    #request-header {
+      font-weight: bolder;
     }
     .form-group {
       padding: 0 px-to-rem(20px);
@@ -27,9 +31,158 @@
     }
 
     .button-group {
+      padding-top: px-to-rem(15px);
       .btn {
         background-color: #4A2545;
         color: #FFFFFF;
+        border-radius: px-to-rem(10px);
+      }
+    }
+
+    #form-label {
+      font-weight: bold;
+    }
+  }
+}
+
+// media query section
+
+@include bp(bp-phones){
+  #new-request {
+    #request-form {
+      height: 59vh;
+      width: 90vw;
+
+      #request-header {
+        font-size: px-to-rem(23px);
+        font-weight: bolder;
+      }
+
+      input[type=text] {
+        height: px-to-rem(35px);
+      }
+
+      textarea {
+        height: px-to-rem(130px);
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-small) {
+  #new-request {
+    #request-form {
+      width: 85vw;
+      height: 67vh;
+
+      #request-header {
+        font-size: px-to-rem(20px);
+      }
+
+      input[type=text] {
+        height: px-to-rem(35px);
+      }
+
+      textarea {
+        height: px-to-rem(100px);
+      }
+
+      #form-label {
+        font-size: px-to-rem(13px);
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-600-height) {
+  #new-request {
+    #request-form {
+      height: 67vh;
+    }
+  }
+}
+
+@include bp(bp-phones-800-height){
+  #new-request {
+    #request-form {
+      height: 52vh;
+      width: 85vw;
+
+      #request-header {
+        font-size: px-to-rem(25px);
+        font-weight: bolder;
+      }
+
+      input[type=text] {
+        height: px-to-rem(35px);
+      }
+
+      textarea {
+        height: px-to-rem(120px);
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  #new-request {
+    #request-form {
+      width: 80vw;
+      height: 62vh;
+
+      input[type=text] {
+        height: px-to-rem(55px);
+        font-size: px-to-rem(25px);
+      }
+
+      textarea {
+        height: px-to-rem(200px);
+        font-size: px-to-rem(25px);
+      }
+
+      #form-label {
+        font-size: px-to-rem(30px);
+      }
+
+      .button-group {
+        .btn {
+          font-size: px-to-rem(28px);
+          padding: px-to-rem(10px) px-to-rem(25px);
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  #new-request {
+    #request-form {
+      width: 80vw;
+      height: 51vh;
+
+      #request-header {
+        font-size: px-to-rem(40px);
+      }
+
+      input[type=text] {
+        height: px-to-rem(55px);
+        font-size: px-to-rem(25px);
+      }
+
+      textarea {
+        height: px-to-rem(250px);
+        font-size: px-to-rem(25px);
+      }
+
+      #form-label {
+        font-size: px-to-rem(30px);
+      }
+
+      .button-group {
+        .btn {
+          font-size: px-to-rem(28px);
+          padding: px-to-rem(10px) px-to-rem(25px);
+        }
       }
     }
   }
