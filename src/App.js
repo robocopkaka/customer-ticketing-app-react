@@ -3,12 +3,14 @@ import './App.css';
 
 import Main from "./components/main";
 import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="App">
-      <Navbar isLoggedIn={localStorage.getItem('isLoggedIn')} />
-      <Main />
+      <Navbar />
+      <div id="site-body"><Main /></div>
+      <Footer/>
     </div>
   );
 }

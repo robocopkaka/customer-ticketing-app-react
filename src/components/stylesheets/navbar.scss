@@ -4,25 +4,24 @@
 $navbar-background-color: #4A2545;
 
 #navbar-section {
-  nav {
-    padding: 0 20px;
-    background-color: #4A2545;
-    color: #FFFFFF;
-    height: px-to-rem(70px);
-    .nav-link {
-      //background-color: $navbar-background-color;
-      color: white;
-      &:hover {
-        background-color: #FCF7FF;
-        color: #4A2545;
-        border-radius: px-to-rem(8px);
+  .navbar {
+      padding: 0 20px;
+      background-color: $navbar-background-color;
+      //color: #FFFFFF;
+      height: px-to-rem(70px);
+      .nav-link {
+        //background-color: $navbar-background-color;
+        color: white;
+        &:hover {
+          background-color: #FCF7FF;
+          color: #4A2545;
+          border-radius: px-to-rem(8px);
+        }
       }
-    }
-    .navbar {
       color: #FFFFFF;
       .navbar-nav {
         .nav-item {
-          font-size: 100px;
+          font-size: px-to-rem(15px);
           &:hover {
             background-color: #FCF7FF;
             color: #4A2545;
@@ -38,6 +37,16 @@ $navbar-background-color: #4A2545;
           background-color: #A288A6;
         }
         }
+      .navbar-toggler {
+        border-color: rgba(255,255,255,.1);
+        height: px-to-rem(40px);
+        width: px-to-rem(40px);
+        .navbar-toggler-icon {
+          background-image: url(./burger.png);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+      }
     }
-  }
 }

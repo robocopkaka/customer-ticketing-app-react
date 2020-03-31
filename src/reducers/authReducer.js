@@ -30,6 +30,16 @@ export default function authReducer(state = initialState.auth, action) {
         message: { $set: 'Signup failed' }
       });
       return newState;
+    case 'LOGOUT_SUCCESS':
+      newState = update(state, {
+        authenticated: { $set: false }
+      });
+      return newState;
+    case 'USER_LOGGED_IN':
+      newState = update(state, {
+        authenticated: { $set: action.status }
+      });
+      return newState;
     default:
       return state;
   }

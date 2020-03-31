@@ -3,32 +3,58 @@ import { connect } from 'react-redux';
 import './stylesheets/navbar.scss';
 import {Link} from "react-router-dom";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 import * as actions from '../actions/authActions';
 import history from "../history";
 
 class Navbar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = { collapsed: false };
     this.logout = this.logout.bind(this);
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.actions.loggedIn();
+  }
+
+  toggleCollapse() {
+    this.setState({ collapsed: !this.state.collapsed });
   }
 
   logout(event) {
     event.preventDefault();
-    this.props.actions.logout()
+    this.props.actions.logout();
     history.push('/');
   }
   render() {
+    const { collapsed } = this.state;
+    const collapseClasses = classNames(
+      'collapse', 'navbar-collapse', { 'show': collapsed }
+    );
+    const togglerClasses = classNames(
+      'navbar-toggler', { 'collapsed': collapsed }
+    );
     return (
       <div id="navbar-section">
         <nav className="navbar navbar-expand-lg">
-          <div className="navbar-brand">
-            <div className="nav-item">
-              Ticketyyyy
-            </div>
-          </div>
+          <a className="navbar-brand">
+            Ticketyyyy
+          </a>
+          <button
+            className={togglerClasses}
+            type="button"
+            data-toggle="collapse"
+            data-target="#main-navbar"
+            onClick={this.toggleCollapse}
+            aria-controls="main-navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          ><span className="navbar-toggler-icon" /></button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
+          <div className={collapseClasses} id="main-navbar">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               <li className="nav-item">
                 <Link to="/" className="nav-link">Home</Link>
               </li>
@@ -41,28 +67,28 @@ class Navbar extends Component {
             </ul>
           </div>
 
-          <div className="buttons">
-            {localStorage.getItem('isLoggedIn') ? (
-              <Link to="#">
-                <button className="btn btn-light" onClick={this.logout}>
-                  Logout
-                </button>
-              </Link>
-            ) : (
-              <Fragment>
-                <Link to="/customers/login">
-                  <button className="btn btn-light">
-                    Login
-                  </button>
-                </Link>
-                <Link to="/signup">
-                  <button className="btn btn-light">
-                    Signup
-                  </button>
-                </Link>
-              </Fragment>
-            )}
-          </div>
+          {/*<div className="buttons">*/}
+          {/*  {this.props.authenticated ? (*/}
+          {/*    <Link to="#">*/}
+          {/*      <button className="btn btn-light" onClick={this.logout}>*/}
+          {/*        Logout*/}
+          {/*      </button>*/}
+          {/*    </Link>*/}
+          {/*  ) : (*/}
+          {/*    <Fragment>*/}
+          {/*      <Link to="/customers/login">*/}
+          {/*        <button className="btn btn-light">*/}
+          {/*          Login*/}
+          {/*        </button>*/}
+          {/*      </Link>*/}
+          {/*      <Link to="/signup">*/}
+          {/*        <button className="btn btn-light">*/}
+          {/*          Signup*/}
+          {/*        </button>*/}
+          {/*      </Link>*/}
+          {/*    </Fragment>*/}
+          {/*  )}*/}
+          {/*</div>*/}
         </nav>
       </div>
     );
