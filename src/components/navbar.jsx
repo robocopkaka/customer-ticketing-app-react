@@ -56,39 +56,44 @@ class Navbar extends Component {
           <div className={collapseClasses} id="main-navbar">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/" className="nav-link" onClick={this.toggleCollapse}>Home</Link>
               </li>
               <li className="nav-item">
-                <Link to="/create-requests" className="nav-link">Add tickets</Link>
+                <Link to="/create-requests" className="nav-link" onClick={this.toggleCollapse}>Add tickets</Link>
               </li>
               <li className="nav-item">
-                <Link to="/requests" className="nav-link">View tickets</Link>
+                <Link to="/requests" className="nav-link" onClick={this.toggleCollapse}>View tickets</Link>
               </li>
             </ul>
+            <div className="buttons">
+              {this.props.authenticated ? (
+                <Link>
+                  <button className="btn btn-light" onClick={this.logout}>
+                    Logout
+                  </button>
+                </Link>
+              ) : (
+                <Fragment>
+                  <Link to="/customers/login">
+                    <button
+                      className="btn btn-light"
+                      onClick={this.toggleCollapse}
+                    >
+                      Login
+                    </button>
+                  </Link>
+                  <Link to="/signup">
+                    <button
+                      className="btn btn-light"
+                      onClick={this.toggleCollapse}
+                    >
+                      Signup
+                    </button>
+                  </Link>
+                </Fragment>
+              )}
+            </div>
           </div>
-
-          {/*<div className="buttons">*/}
-          {/*  {this.props.authenticated ? (*/}
-          {/*    <Link to="#">*/}
-          {/*      <button className="btn btn-light" onClick={this.logout}>*/}
-          {/*        Logout*/}
-          {/*      </button>*/}
-          {/*    </Link>*/}
-          {/*  ) : (*/}
-          {/*    <Fragment>*/}
-          {/*      <Link to="/customers/login">*/}
-          {/*        <button className="btn btn-light">*/}
-          {/*          Login*/}
-          {/*        </button>*/}
-          {/*      </Link>*/}
-          {/*      <Link to="/signup">*/}
-          {/*        <button className="btn btn-light">*/}
-          {/*          Signup*/}
-          {/*        </button>*/}
-          {/*      </Link>*/}
-          {/*    </Fragment>*/}
-          {/*  )}*/}
-          {/*</div>*/}
         </nav>
       </div>
     );

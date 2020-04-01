@@ -76,25 +76,6 @@
       #view {
         @include home-buttons;
       }
-
-      //@include bp(bp-phones) {
-      //  width: 50%;
-      //  margin: auto;
-      //  padding-top: px-to-rem(20px);
-      //}
-      //@include bp(bp-phones-small) {
-      //  width: 60%;
-      //  margin: auto;
-      //  padding-top: px-to-rem(5px);
-      //}
-      //@include bp(bp-tablet) {
-      //  width: 70%;
-      //  //margin: auto;
-      //}
-      //@include bp(bp-tablet-big) {
-      //  width: 50%;
-      //  margin: auto;
-      //}
     }
   }
   #image-div {
