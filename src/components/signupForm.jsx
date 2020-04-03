@@ -16,7 +16,7 @@ const SignupForm = ({
   return (
     <div id="signup">
       <form onSubmit={signup} id="signup-form">
-        <h2>Signup</h2>
+        <h2 id="signup-header">Signup</h2>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input

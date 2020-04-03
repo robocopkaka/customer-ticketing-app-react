@@ -42,7 +42,7 @@ class AssignRequest extends Component{
       <div id="agents">
         <h3 id="header">Assign request</h3>
         <form onSubmit={this.assignRequest}>
-          Agents:<br/>
+          <span id="form-header">Agents:</span><br/>
           <select
             value={this.state.agent}
             onChange={this.handleChange}

@@ -1,5 +1,7 @@
 @mixin bp($point) {
-  $bp-phones: "(min-width: 321px) and (max-width: 767px)";
+  $bp-phones: "(min-width: 321px) and (max-width: 767px) and (max-height: 799px)";
+  $bp-phones-800-height: "(min-width: 321px) and (max-width: 767px) and (min-height: 800px) and (max-height: 999px)";
+  $bp-phones-600-height: "(min-width: 321px) and (max-width: 767px) and (min-height: 600px) and (max-height: 699px)";
   $bp-phones-small: "(min-width: 200px) and (max-width: 320px)";
   $bp-tablet: "(min-width: 768px) and (max-width: 835px)";
   $bp-tablet-big: "(min-width: 1024px) and (max-width: 1112px)";
@@ -7,6 +9,13 @@
 
   @if $point == bp-phones {
     @media #{$bp-phones} { @content; }
+  }
+
+  @else if $point == bp-phones-600-height {
+    @media #{$bp-phones-600-height} { @content; }
+  }
+  @else if $point == bp-phones-800-height {
+    @media #{$bp-phones-800-height} { @content; }
   }
   @else if $point == bp-tablet {
     @media #{$bp-tablet} { @content; }

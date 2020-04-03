@@ -17,6 +17,14 @@ export function signupFailure() {
   return { type: 'SIGNUP_FAILURE' }
 }
 
+export function logoutSuccess() {
+  return { type: 'LOGOUT_SUCCESS' }
+}
+
+export function userLoggedIn(status) {
+  return { type: 'USER_LOGGED_IN', status }
+}
+
 export function login(type, user) {
   return (dispatch) => {
     return AuthApi.login(type, user)
@@ -61,5 +69,14 @@ export function logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
     localStorage.setItem('isLoggedIn', false);
+    dispatch(logoutSuccess());
   }
+}
+
+export function loggedIn() {
+    return (dispatch) => {
+      const loggedIn = localStorage.getItem('loggedIn');
+      console.log(loggedIn)
+      dispatch(userLoggedIn(loggedIn))
+    }
 }

@@ -1,4 +1,5 @@
 @import "functions/px_to_rem";
+@import "mixins/media_query_mixins";
 
 @mixin request-button {
   .button-group {
@@ -7,6 +8,13 @@
       color: #FFFFFF;
     }
   }
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
 }
 
 #request-description-section {
@@ -52,6 +60,12 @@
         padding: 0 px-to-rem(40px);
       }
 
+      .button-group {
+        .btn {
+          border-radius: px-to-rem(8px);
+        }
+      }
+
       .form-control:focus {
         border-color: #4A2545;
       }
@@ -88,7 +102,7 @@
     margin-top: px-to-rem(40px);
     border-radius: px-to-rem(8px);
     background: #FFFFFF;
-    height: 20vh;
+    height: 25vh;
     text-align: left;
 
     #agents {
@@ -101,7 +115,350 @@
       .button-group {
         padding-top: px-to-rem(10px);
         .btn {
+          border-radius: px-to-rem(8px);
           font-size: px-to-rem(15px);
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones) {
+  #request-description-section {
+    @include flex-column;
+    height: auto;
+    padding-bottom: px-to-rem(50px);
+
+    #description {
+      //order: 1;
+      .card {
+        width: 85vw;
+        .card-body {
+          .request-description-text {
+            font-weight: 100;
+            font-size: px-to-rem(15px);
+          }
+        }
+      }
+      #assign-request {
+        order: 2;
+        height: 30vh;
+      }
+    }
+
+    #comments {
+      height: 80vh;
+      width: 95vw;
+
+      #comments-header {
+        font-size: px-to-rem(20px);
+      }
+
+      #comment-form {
+        height: 25vh;
+        textarea {
+          height: 10vh;
+          font-size: px-to-rem(13px);
+        }
+        .button-group {
+          .btn {
+            font-size: px-to-rem(15px);
+          }
+        }
+      }
+      #comments-list {
+        height: 40vh;
+
+        #commenter-name {
+          #comment {
+            font-size: px-to-rem(13px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-800-height) {
+  #request-description-section {
+    @include flex-column;
+    height: auto;
+    padding-bottom: px-to-rem(50px);
+
+    #description {
+      //order: 1;
+      .card {
+        width: 85vw;
+        .card-body {
+          .request-description-text {
+            font-weight: 100;
+            font-size: px-to-rem(18px);
+          }
+        }
+      }
+      #assign-request {
+        height: 22vh;
+      }
+    }
+
+    #comments {
+      height: 80vh;
+      width: 95vw;
+
+      #comments-header {
+        font-size: px-to-rem(20px);
+      }
+
+      #comment-form {
+        height: 30vh;
+        textarea {
+          height: 15vh;
+          font-size: px-to-rem(13px);
+        }
+        .button-group {
+          .btn {
+            font-size: px-to-rem(18px);
+          }
+        }
+      }
+      #comments-list {
+        height: 50vh;
+
+        #commenter-name {
+          #comment {
+            font-size: px-to-rem(18px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-small) {
+  #request-description-section {
+    @include flex-column;
+    height: auto;
+    padding-bottom: px-to-rem(50px);
+
+    #description {
+      .card {
+        width: 85vw;
+        height: 48vh;
+        margin-bottom: px-to-rem(-10px);
+        .card-body {
+          .request-description-text {
+            font-weight: 100;
+            font-size: px-to-rem(15px);
+          }
+          h5 {
+            font-size: px-to-rem(20px);
+          }
+        }
+      }
+      #assign-request {
+        height: 32vh;
+      }
+    }
+
+    #comments {
+      height: 80vh;
+      width: 95vw;
+
+      #comments-header {
+        font-size: px-to-rem(20px);
+      }
+
+      #comment-form {
+        height: 30vh;
+        textarea {
+          height: 10vh;
+          font-size: px-to-rem(13px);
+        }
+        .button-group {
+          .btn {
+            font-size: px-to-rem(13px);
+          }
+        }
+      }
+      #comments-list {
+        height: 40vh;
+
+        #commenter-name {
+          #comment {
+            font-size: px-to-rem(18px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  #request-description-section {
+    @include flex-column;
+    height: auto;
+    padding-bottom: px-to-rem(50px);
+
+    #description {
+      .card {
+        width: 85vw;
+        .card-body {
+          .request-description-text {
+            font-weight: 100;
+            font-size: px-to-rem(30px);
+          }
+          .header {
+            font-size: px-to-rem(40px);
+          }
+        }
+      }
+      #assign-request {
+        height: 28vh;
+        margin-bottom: px-to-rem(20px);
+        .button-group {
+          padding-top: px-to-rem(25px);
+          .btn {
+            font-size: px-to-rem(30px);
+          }
+        }
+
+        #agents {
+          h3 {
+            font-size: px-to-rem(40px);
+          }
+          select {
+            font-size: px-to-rem(25px);
+          }
+          #form-header {
+            font-size: px-to-rem(25px);
+          }
+        }
+      }
+    }
+
+    #comments {
+      height: 90vh;
+      width: 95vw;
+
+      #comments-header {
+        font-size: px-to-rem(40px);
+      }
+
+      label {
+        font-size: px-to-rem(25px);
+      }
+
+      #comment-form {
+        height: 35vh;
+        textarea {
+          height: 20vh;
+          font-size: px-to-rem(30px);
+        }
+        .button-group {
+          .btn {
+            font-size: px-to-rem(25px);
+          }
+        }
+      }
+      #comments-list {
+        height: 40vh;
+
+        #commenter-name {
+          #name {
+            font-size: px-to-rem(30px);
+          }
+          #created-at {
+            font-size: px-to-rem(18px);
+          }
+        }
+        #comment {
+          font-size: px-to-rem(25px);
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  #request-description-section {
+    @include flex-column;
+    height: auto;
+    padding-bottom: px-to-rem(50px);
+
+    #description {
+      .card {
+        width: 85vw;
+        .card-body {
+          .request-description-text {
+            font-weight: 100;
+            font-size: px-to-rem(30px);
+          }
+          .header {
+            font-size: px-to-rem(40px);
+          }
+        }
+      }
+      #assign-request {
+        height: 28vh;
+        margin-bottom: px-to-rem(20px);
+        .button-group {
+          padding-top: px-to-rem(25px);
+          .btn {
+            font-size: px-to-rem(30px);
+          }
+        }
+
+        #agents {
+          h3 {
+            font-size: px-to-rem(40px);
+          }
+          select {
+            font-size: px-to-rem(25px);
+          }
+          #form-header {
+            font-size: px-to-rem(25px);
+          }
+        }
+      }
+    }
+
+    #comments {
+      height: 90vh;
+      width: 95vw;
+
+      #comments-header {
+        font-size: px-to-rem(40px);
+      }
+
+      label {
+        font-size: px-to-rem(25px);
+      }
+
+      #comment-form {
+        height: 33vh;
+        textarea {
+          height: 20vh;
+          font-size: px-to-rem(30px);
+        }
+        .button-group {
+          .btn {
+            font-size: px-to-rem(30px);
+          }
+        }
+      }
+      #comments-list {
+        height: 40vh;
+
+        #commenter-name {
+          #name {
+            font-size: px-to-rem(35px);
+          }
+          #created-at {
+            font-size: px-to-rem(23px);
+          }
+        }
+        #comment {
+          font-size: px-to-rem(28px);
         }
       }
     }

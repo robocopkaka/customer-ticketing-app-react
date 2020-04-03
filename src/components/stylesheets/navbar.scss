@@ -3,41 +3,205 @@
 @import "mixins/media_query_mixins";
 $navbar-background-color: #4A2545;
 
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 #navbar-section {
-  nav {
+  color: #FFFFFF;
+  .navbar {
     padding: 0 20px;
-    background-color: #4A2545;
-    color: #FFFFFF;
-    height: px-to-rem(70px);
-    .nav-link {
-      //background-color: $navbar-background-color;
-      color: white;
-      &:hover {
-        background-color: #FCF7FF;
-        color: #4A2545;
-        border-radius: px-to-rem(8px);
+    background-color: $navbar-background-color;
+    //color: #FFFFFF;
+    max-height: px-to-rem(250px);
+    min-height: px-to-rem(70px);
+    height: auto;
+
+    .navbar-brand {
+      font-weight: bolder;
+    }
+    .navbar-nav {
+      .nav-item {
+        font-size: px-to-rem(15px);
+        &:hover {
+          background-color: #FCF7FF;
+          color: #4A2545;
+        }
+      }
+      .nav-link {
+        //background-color: $navbar-background-color;
+        color: white;
+        &:hover {
+          background-color: #FCF7FF;
+          color: #4A2545;
+          border-radius: px-to-rem(8px);
+        }
       }
     }
+    .buttons {
+      padding: px-to-rem(15px) px-to-rem(20px);
+      a {
+        margin-right: px-to-rem(10px);
+      }
+      .is-primary {
+        background-color: #A288A6;
+      }
+     }
+    .navbar-toggler {
+      .navbar-toggler-icon {
+        background-image: url(./burger.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+  }
+}
+
+@include bp(bp-phones) {
+  #navbar-section {
     .navbar {
-      color: #FFFFFF;
       .navbar-nav {
+        @include flex-column;
         .nav-item {
-          font-size: 100px;
-          &:hover {
-            background-color: #FCF7FF;
-            color: #4A2545;
-          }
+          font-size: px-to-rem(15px);
+          margin-top: px-to-rem(-10px);
         }
       }
       .buttons {
-        padding: px-to-rem(15px) px-to-rem(20px);
-        .btn {
-          margin-right: px-to-rem(10px);
+        @include flex-column;
+        padding: px-to-rem(10px);
+        margin-top: px-to-rem(-10px);
+
+        button {
+          font-size: px-to-rem(13px);
+          margin-bottom: px-to-rem(10px);
+          margin-left: px-to-rem(-12px);
+          font-weight: bolder;
+          color: #4A2545;
         }
-        .is-primary {
-          background-color: #A288A6;
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-600-height) {
+  #navbar-section {
+    .navbar {
+      min-height: px-to-rem(80px);
+      .navbar-nav {
+        .nav-item {
+          font-size: px-to-rem(13px);
+          margin-top: px-to-rem(-10px);
         }
+      }
+      .buttons {
+        font-size: px-to-rem(13px);
+      }
+    }
+  }
+}
+@include bp(bp-phones-small) {
+  #navbar-section {
+    .navbar {
+      .navbar-nav {
+        @include flex-column;
+        .nav-item {
+          font-size: px-to-rem(13px);
+          margin-top: px-to-rem(-8px);
         }
+      }
+      .buttons {
+        @include flex-column;
+        padding: px-to-rem(10px);
+        margin-top: px-to-rem(-10px);
+
+        button {
+          font-size: px-to-rem(13px);
+          margin-bottom: px-to-rem(10px);
+          margin-left: px-to-rem(-12px);
+          font-weight: bolder;
+          color: #4A2545;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-800-height) {
+  #navbar-section {
+    .navbar {
+      min-height: px-to-rem(100px);
+      .navbar-nav {
+        @include flex-column;
+        .nav-item {
+          font-size: px-to-rem(15px);
+          margin-top: px-to-rem(-8px);
+        }
+      }
+      .buttons {
+        @include flex-column;
+        padding: px-to-rem(10px);
+        margin-top: px-to-rem(-10px);
+
+        button {
+          font-size: px-to-rem(15px);
+          margin-bottom: px-to-rem(10px);
+          margin-left: px-to-rem(-12px);
+          font-weight: bolder;
+          color: #4A2545;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  #navbar-section {
+    .navbar {
+      max-height: px-to-rem(350px);
+      min-height: px-to-rem(100px);
+      .navbar-nav {
+        @include flex-column;
+        .nav-item {
+          font-size: px-to-rem(25px);
+          margin-top: px-to-rem(-8px);
+        }
+      }
+      .buttons {
+        @include flex-column;
+        padding: px-to-rem(10px);
+        margin-top: px-to-rem(-10px);
+
+        button {
+          font-size: px-to-rem(25px);
+          margin-bottom: px-to-rem(10px);
+          margin-left: px-to-rem(-12px);
+          font-weight: bolder;
+          color: #4A2545;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  #navbar-section {
+    .navbar {
+      min-height: px-to-rem(100px);
+
+      .navbar-brand {
+        font-size: px-to-rem(30px);
+        font-weight: bolder;
+      }
+
+      .navbar-nav {
+        .nav-item {
+          font-size: px-to-rem(25px);
+        }
+      }
     }
   }
 }

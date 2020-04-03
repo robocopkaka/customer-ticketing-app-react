@@ -1,4 +1,5 @@
 @import "functions/px_to_rem";
+@import "mixins/media_query_mixins";
 .input-forms {
   display: flex;
   align-items: center;
@@ -11,8 +12,28 @@
     background-color: #FFFFFF;
     border-radius: px-to-rem(8px);
     padding-top: px-to-rem(20px);
-    height: 40vh;
+    height: 45vh;
     width: 40vw;
+    @include bp(bp-tablet-big) {
+      height: 30vh;
+    }
+
+    @include bp(bp-phones) {
+      width: 80vw;
+    }
+
+    @include bp(bp-phones-600-height) {
+      height: 50vh;
+    }
+
+    @include bp(bp-phones-small) {
+      width: 80vw;
+      height: 60vh;
+    }
+
+    @include bp(bp-tablet) {
+      height: 33vh;
+    }
 
     label {
       float: left;
@@ -30,6 +51,49 @@
       .btn {
         background-color: #4A2545;
         color: #FFFFFF;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-800-height) {
+  .input-forms {
+    #login-form {
+      width: 85vw;
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  .input-forms {
+    #login-form {
+      width: 85vw;
+      height: 37vh;
+
+      input {
+        height: 6vh;
+        font-size: 3vh;
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  .input-forms {
+    #login-form {
+      width: 85vw;
+      height: 32vh;
+
+      input {
+        height: 6vh;
+        font-size: 3vh;
+      }
+
+      .button-group {
+        .btn {
+          font-size: px-to-rem(28px);
+        }
       }
     }
   }

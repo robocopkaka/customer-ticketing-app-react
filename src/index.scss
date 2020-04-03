@@ -1,16 +1,62 @@
 @import "components/stylesheets/home";
 @import "components/stylesheets/navbar";
 @import "components/stylesheets/login-form";
+@import "components/stylesheets/mixins/media_query_mixins";
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  #site-body {
+    flex: 1 0 auto;
+  }
+
+  #site-footer {
+    flex-shrink: 0;
+    background: #4A2545;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    height: px-to-rem(50px);
+
+    @include bp(bp-phones) {
+      height: px-to-rem(50px);
+      font-size: px-to-rem(13px);
+    }
+    @include bp(bp-phones-small) {
+      height: px-to-rem(30px);
+      font-size: px-to-rem(10px);
+    }
+    @include bp(bp-phones-600-height) {
+      height: px-to-rem(30px);
+      font-size: px-to-rem(11px);
+    }
+    @include bp(bp-phones-800-height) {
+      height: px-to-rem(55px);
+      font-size: px-to-rem(13px);
+    }
+    @include bp(bp-tablet) {
+      height: px-to-rem(100px);
+    }
+    @include bp(bp-tablet-big) {
+      height: px-to-rem(100px);
+    }
+  }
 }
 
 code {

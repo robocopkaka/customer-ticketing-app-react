@@ -1,4 +1,5 @@
 @import "functions/px_to_rem";
+@import "mixins/media_query_mixins";
 #signup {
   display: flex;
   align-items: center;
@@ -32,6 +33,170 @@
       .btn {
         background-color: #4A2545;
         color: #FFFFFF;
+        border-radius: px-to-rem(8px);
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-small) {
+  #signup {
+    #signup-form {
+      width: 85vw;
+      height: 75vh;
+
+      #signup-header {
+        font-size: px-to-rem(25px);
+      }
+
+      .form-group {
+        label {
+          font-size: px-to-rem(13px);
+          font-weight: bolder;
+        }
+
+        input {
+          height: px-to-rem(28px);
+          font-size: px-to-rem(15px);
+        }
+      }
+      .button-group {
+        .btn {
+          font-size: px-to-rem(10px);
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones) {
+  #signup {
+    #signup-form {
+      width: 85vw;
+      height: 65vh;
+
+      #signup-header {
+        font-size: px-to-rem(30px);
+      }
+
+      .form-group {
+        label {
+          font-size: px-to-rem(15px);
+          font-weight: bolder;
+        }
+
+        input {
+          height: px-to-rem(30px);
+          font-size: px-to-rem(15px);
+        }
+      }
+      .button-group {
+        .btn {
+          font-size: px-to-rem(15px);
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-600-height) {
+  #signup {
+    #signup-form {
+      height: 73vh;
+    }
+  }
+}
+
+@include bp(bp-phones-800-height) {
+  #signup {
+    #signup-form {
+      width: 90vw;
+      height: 68vh;
+
+      #signup-header {
+        font-size: px-to-rem(35px);
+      }
+
+      .form-group {
+        label {
+          font-size: px-to-rem(18px);
+          font-weight: bolder;
+        }
+
+        input {
+          height: px-to-rem(40px);
+          font-size: px-to-rem(20px);
+        }
+      }
+      .button-group {
+        .btn {
+          font-size: px-to-rem(15px);
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  #signup {
+    #signup-form {
+      width: 85vw;
+      height: 75vh;
+
+      #signup-header {
+        font-size: px-to-rem(50px);
+      }
+
+      .form-group {
+        label {
+          font-size: px-to-rem(25px);
+          font-weight: bolder;
+        }
+
+        input {
+          height: px-to-rem(60px);
+          font-size: px-to-rem(25px);
+        }
+      }
+      .button-group {
+        .btn {
+          font-size: px-to-rem(25px);
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  #signup {
+    #signup-form {
+      width: 85vw;
+      height: 62vh;
+
+      #signup-header {
+        font-size: px-to-rem(60px);
+      }
+
+      .form-group {
+        label {
+          font-size: px-to-rem(25px);
+          font-weight: bolder;
+        }
+
+        input {
+          height: px-to-rem(70px);
+          font-size: px-to-rem(30px);
+        }
+      }
+      .button-group {
+        .btn {
+          font-size: px-to-rem(28px);
+          font-weight: bolder;
+        }
       }
     }
   }

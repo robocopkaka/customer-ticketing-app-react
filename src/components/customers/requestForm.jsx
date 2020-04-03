@@ -11,9 +11,9 @@ const RequestForm = (
   return (
     <div id="new-request">
       <form onSubmit={create} id="request-form">
-        <h2>Create Request</h2>
+        <h2 id="request-header">Create Request</h2>
         <div className="form-group">
-          <label htmlFor="email">Subject</label>
+          <label htmlFor="email" id="form-label">Subject</label>
           <input
             value={subject}
             type="text" name="subject"
@@ -24,7 +24,7 @@ const RequestForm = (
         </div>
 
         <div className="form-group">
-          <label>description</label>
+          <label htmlFor="description" id="form-label">Description</label>
           <textarea
             value={description}
             type="textarea"

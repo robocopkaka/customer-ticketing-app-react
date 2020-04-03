@@ -1,8 +1,14 @@
 @import "functions/px_to_rem";
+@import "mixins/media_query_mixins";
 
 @mixin flex-row {
   display: flex;
   flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 #all-requests {
@@ -23,7 +29,17 @@
       .row {
         .card-body {
           @include flex-row;
-          justify-content: space-evenly;
+          justify-content: space-between;
+
+          #subject {
+            width: 15vw;
+          }
+          #time {
+            width: 15vw;
+          }
+          #status {
+            width: 15vw;
+          }
         }
       }
     }
@@ -48,6 +64,99 @@
         color: #FFFFFF;
         width: px-to-rem(20px);
         border-radius: px-to-rem(10px);
+      }
+    }
+  }
+}
+
+@include bp(bp-phones) {
+  #all-requests {
+    @include flex-column;
+    align-items: center;
+    width: 100vw;
+    font-size: px-to-rem(15px);
+
+    #requests-info {
+      padding: px-to-rem(20px) 0 px-to-rem(30px) 0;
+      .card {
+        width: 70vw;
+        .card-body {
+          font-size: px-to-rem(15px);
+        }
+      }
+    }
+
+    #request-list {
+      .card {
+        width: 90vw;
+      }
+    }
+  }
+}
+
+@include bp(bp-phones-800-height) {
+  #all-requests {
+    @include flex-column;
+    align-items: center;
+    width: 100vw;
+    font-size: px-to-rem(15px);
+
+    #requests-info {
+      padding: px-to-rem(10px) 0 px-to-rem(30px) 0;
+      .card {
+        width: 70vw;
+      }
+    }
+
+    #request-list {
+      .card {
+        width: 90vw;
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet) {
+  #all-requests {
+    @include flex-column;
+    align-items: center;
+    width: 100vw;
+
+    #requests-info {
+      padding: px-to-rem(10px) 0 px-to-rem(30px) 0;
+      font-size: px-to-rem(20px);
+      .card {
+        width: 70vw;
+      }
+    }
+
+    #request-list {
+      font-size: px-to-rem(23px);
+      .card {
+        width: 90vw;
+      }
+    }
+  }
+}
+
+@include bp(bp-tablet-big) {
+  #all-requests {
+    @include flex-column;
+    align-items: center;
+    width: 100vw;
+
+    #requests-info {
+      padding: px-to-rem(10px) 0 px-to-rem(30px) 0;
+      font-size: px-to-rem(25px);
+      .card {
+        width: 70vw;
+      }
+    }
+
+    #request-list {
+      font-size: px-to-rem(30px);
+      .card {
+        width: 90vw;
       }
     }
   }

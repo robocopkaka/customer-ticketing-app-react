@@ -66,7 +66,7 @@ class RequestComments extends Component {
     return (
       <Fragment>
         <div id="request-comments">
-          <h3>Comments</h3>
+          <h3 id="comments-header">Comments</h3>
           <CommentInput
             body={body}
             errorMessages={errorMessages}

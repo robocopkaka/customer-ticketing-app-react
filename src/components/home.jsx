@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 class Home extends Component {
   render() {
     return (
-      <div className="container">
         <div id="home">
           <div id="head-section">
             <div id="headers">
@@ -39,7 +38,6 @@ class Home extends Component {
             />
           </div>
         </div>
-      </div>
     );
   }
 }
