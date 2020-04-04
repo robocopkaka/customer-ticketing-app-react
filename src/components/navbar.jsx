@@ -29,6 +29,7 @@ class Navbar extends Component {
     history.push('/');
   }
   render() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const { collapsed } = this.state;
     const collapseClasses = classNames(
       'collapse', 'navbar-collapse', { 'show': collapsed }
@@ -66,8 +67,8 @@ class Navbar extends Component {
               </li>
             </ul>
             <div className="buttons">
-              {this.props.authenticated ? (
-                <Link>
+              {isLoggedIn ? (
+                <Link to="">
                   <button className="btn btn-light" onClick={this.logout}>
                     Logout
                   </button>

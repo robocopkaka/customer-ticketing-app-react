@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7da7693a-c38b-4ce7-9f81-1239b8097773/deploy-status)](https://app.netlify.com/sites/hopeful-spence-9db445/deploys)
+
 ## Prerequisites
 * Yarn
 * Node -  10.19.0
