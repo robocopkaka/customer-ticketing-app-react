@@ -24,7 +24,7 @@ class Home extends Component {
                 </button>
 
                 <button id="view">
-                  <Link to="/fetch-requests">View all tickets</Link>
+                  <Link to="/requests">View all tickets</Link>
                 </button>
               </div>
             </div>
