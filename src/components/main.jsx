@@ -34,7 +34,7 @@ const SupportAgentRoute = ({ component: Component, ...rest }) => (
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    localStorage.getItem('userType')
+    localStorage.getItem('isLoggedIn') === "true"
       ? <Component {...props} />
       : <Redirect to={{
         pathname: "/customers/login",
