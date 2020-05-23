@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from './defaultConfig';
 
 class AuthApi {
   static login(type, user) {
-    return axios.post(`http://localhost:3001/${type}/login`, user, {
+    return axios.post(`${type}/login`, user, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -14,7 +14,7 @@ class AuthApi {
   }
 
   static signup(type, user) {
-    return axios.post(`http://localhost:3001/${type}`, user, {
+    return axios.post(`${type}`, user, {
       headers: {
         'Content-Type': 'application/json'
       }
