@@ -9,10 +9,14 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div id="site-body"><Main /></div>
+      <div id="site-body"><Main userType={getUser()} /></div>
       <Footer/>
     </div>
   );
+}
+
+function getUser() {
+  return localStorage.getItem('userType')
 }
 
 export default App;

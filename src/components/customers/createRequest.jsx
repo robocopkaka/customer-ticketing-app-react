@@ -36,6 +36,7 @@ class CreateRequest extends Component {
         .then(() => {
           history.push('/');
         })
+        .catch(() => {})
     }
   }
 
@@ -44,6 +45,7 @@ class CreateRequest extends Component {
   }
 
   render() {
+    // console.log(this.props.userType)
     const { subject, description, errorMessages } = this.state;
     return (
       <RequestForm

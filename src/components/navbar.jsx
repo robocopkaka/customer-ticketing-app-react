@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import { bindActionCreators } from "redux";
 import classNames from "classnames";
 import * as actions from '../actions/authActions';
+import * as sessionActions from '../actions/sessionActions';
 import history from "../history";
 
 class Navbar extends Component {
@@ -17,6 +18,11 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.actions.loggedIn();
+    this.props.actions.fetchSession()
+      .catch(() => {
+        // console.log("gets here")
+        // this.forceUpdate()
+      })
   }
 
   toggleCollapse() {
@@ -109,7 +115,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(Object.assign({}, actions, sessionActions), dispatch)
   }
 }
 

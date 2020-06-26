@@ -5,7 +5,7 @@ class RequestApi {
     return axios.post('/support_requests', request, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
+        'session_id': `${localStorage.sessionId}`
       }
     })
       .then(response => response.data)

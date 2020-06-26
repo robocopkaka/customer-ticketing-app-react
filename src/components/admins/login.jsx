@@ -31,7 +31,7 @@ class AdminLogin extends Component {
   login(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    const user = { auth: { email, password } };
+    const user = { email, password };
     this.setState(loginFormValidator);
     if (this.validForm) {
       this.props.actions.login('admins', user)

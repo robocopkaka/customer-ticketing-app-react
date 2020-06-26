@@ -10,20 +10,23 @@ import CustomerRequests from "./customers/requests";
 import SupportAgentRequests from "./support_agents/requests";
 import SingleRequest from "./singleRequest";
 
-const CustomerRoute = ({ component: Component, ...rest }) => (
-   <Route {...rest} render={(props) => (
-     localStorage.getItem('userType') === 'cust'
-       ? <Component {...props} />
-       : <Redirect to={{
-         pathname: "/customers/login",
-         state: { from: props.location }
-       }} />
-   )} />
+const CustomerRoute = ({ component: Component, userType, ...rest }) => (
+   <Route {...rest} render={(props) => {
+     console.log(userType)
+     return (
+       userType === 'Customer'
+         ? <Component {...props} />
+         : <Redirect to={{
+           pathname: "/customers/login",
+           state: {from: props.location}
+         }}/>
+     )
+   }} />
 );
 
-const SupportAgentRoute = ({ component: Component, ...rest }) => (
+const SupportAgentRoute = ({ component: Component, userType, ...rest }) => (
   <Route {...rest} render={(props) => (
-    localStorage.getItem('userType') === 'supp'
+    userType === 'Support Agent'
       ? <Component {...props} />
       : <Redirect to={{
         pathname: "/support-agents/login",
@@ -43,7 +46,7 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
-const Main = () => (
+const Main = ({ userType }) => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
@@ -51,10 +54,10 @@ const Main = () => (
       <Route exact path="/signup" component={CustomerSignup} />
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />
-      <CustomerRoute exact path="/create-requests" component={CreateRequest} />
-      <AuthenticatedRoute exact path="/requests" component={CustomerRequests} />
-      <SupportAgentRoute exact path="/support-agents/requests" component={SupportAgentRequests} />
-      <AuthenticatedRoute exact path="/requests/:id" component={SingleRequest} />
+      <CustomerRoute exact path="/create-requests" component={CreateRequest} userType={userType} />
+      <AuthenticatedRoute exact path="/requests" component={CustomerRequests} userType={userType} />
+      <SupportAgentRoute exact path="/support-agents/requests" component={SupportAgentRequests} userType={userType} />
+      <AuthenticatedRoute exact path="/requests/:id" component={SingleRequest} userType={userType} />
     </Switch>
   </main>
 );
