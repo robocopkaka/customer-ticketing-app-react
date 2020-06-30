@@ -10,23 +10,20 @@ import CustomerRequests from "./customers/requests";
 import SupportAgentRequests from "./support_agents/requests";
 import SingleRequest from "./singleRequest";
 
-const CustomerRoute = ({ component: Component, userType, ...rest }) => (
-   <Route {...rest} render={(props) => {
-     console.log(userType)
-     return (
-       userType === 'Customer'
-         ? <Component {...props} />
-         : <Redirect to={{
-           pathname: "/customers/login",
-           state: {from: props.location}
-         }}/>
-     )
-   }} />
+const CustomerRoute = ({ component: Component, ...rest }) => (
+   <Route {...rest} render={(props) => (
+     rest['userType'] === 'Customer'
+       ? <Component {...props} />
+       : <Redirect to={{
+         pathname: "/customers/login",
+         state: {from: props.location}
+       }}/>
+   )} />
 );
 
 const SupportAgentRoute = ({ component: Component, userType, ...rest }) => (
   <Route {...rest} render={(props) => (
-    userType === 'Support Agent'
+    rest['userType'] === 'Support Agent'
       ? <Component {...props} />
       : <Redirect to={{
         pathname: "/support-agents/login",
@@ -46,11 +43,21 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
-const Main = ({ userType }) => (
+const Main = ({ userType, isLoggedIn, updateLocalStorageEntry }) => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/customers/login" component={CustomerLogin} />
+      <Route exact
+        path="/customers/login"
+        // component={CustomerLogin}
+         render={(props) => (
+           <CustomerLogin
+             {...props}
+             isLoggedIn={isLoggedIn}
+             updateLocalStorageEntry={updateLocalStorageEntry}
+           />
+         )}
+      />
       <Route exact path="/signup" component={CustomerSignup} />
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />

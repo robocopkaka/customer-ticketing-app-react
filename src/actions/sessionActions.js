@@ -9,7 +9,6 @@ export function fetchSession() {
     return SessionApi.fetchSession()
       .then((response) => {
         const { data: { session } } = response;
-        console.log(session)
         localStorage.setItem('sessionId', session.id);
         localStorage.setItem('userId', session.user_id);
         localStorage.setItem('userType', session.role);

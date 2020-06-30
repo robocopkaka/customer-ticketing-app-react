@@ -78,7 +78,7 @@ export function logout() {
     localStorage.removeItem('sessionId');
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
-    localStorage.setItem('isLoggedIn', false);
+    localStorage.removeItem('isLoggedIn');
     dispatch(logoutSuccess());
   }
 }

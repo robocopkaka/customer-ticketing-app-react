@@ -17,11 +17,10 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.loggedIn();
     this.props.actions.fetchSession()
       .catch(() => {
-        // console.log("gets here")
-        // this.forceUpdate()
+        this.props.updateLocalStorageEntry('userType')
+        localStorage.clear()
       })
   }
 
@@ -32,10 +31,11 @@ class Navbar extends Component {
   logout(event) {
     event.preventDefault();
     this.props.actions.logout();
+    this.props.updateLocalStorageEntry('isLoggedIn');
     history.push('/');
   }
   render() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const isLoggedIn = this.props.isLoggedIn === "true";
     const { collapsed } = this.state;
     const collapseClasses = classNames(
       'collapse', 'navbar-collapse', { 'show': collapsed }
