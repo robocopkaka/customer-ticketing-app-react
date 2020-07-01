@@ -16,13 +16,13 @@ class Navbar extends Component {
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
-  componentDidMount() {
-    this.props.actions.fetchSession()
-      .catch(() => {
-        this.props.updateLocalStorageEntry('userType')
-        localStorage.clear()
-      })
-  }
+  // componentDidMount() {
+  //   this.props.actions.fetchSession()
+  //     .catch(() => {
+  //       this.props.updateLocalStorageEntry('userType')
+  //       localStorage.clear()
+  //     })
+  // }
 
   toggleCollapse() {
     this.setState({ collapsed: !this.state.collapsed });

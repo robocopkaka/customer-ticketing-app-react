@@ -5,7 +5,7 @@ export function fetchSessionSuccess(data) {
 }
 
 export function fetchSession() {
-  return (dispatch) => {
+  return () => {
     return SessionApi.fetchSession()
       .then((response) => {
         const { data: { session } } = response;
@@ -16,8 +16,6 @@ export function fetchSession() {
         localStorage.setItem('expiresAt', session.expires_at);
       })
       .catch((error) => {
-        console.log(error.response);
-        localStorage.clear();
         throw error;
       })
   }

@@ -13,7 +13,7 @@ import SingleRequest from "./singleRequest";
 const CustomerRoute = ({ component: Component, ...rest }) => (
    <Route {...rest} render={(props) => (
      rest['userType'] === 'Customer'
-       ? <Component {...props} />
+       ? <Component {...props} clearLocalStorage={rest['clearLocalStorage']} />
        : <Redirect to={{
          pathname: "/customers/login",
          state: {from: props.location}
@@ -43,7 +43,7 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   )} />
 );
 
-const Main = ({ userType, isLoggedIn, updateLocalStorageEntry }) => (
+const Main = ({ userType, isLoggedIn, clearLocalStorage, updateLocalStorageEntry }) => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
@@ -61,7 +61,13 @@ const Main = ({ userType, isLoggedIn, updateLocalStorageEntry }) => (
       <Route exact path="/signup" component={CustomerSignup} />
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />
-      <CustomerRoute exact path="/create-requests" component={CreateRequest} userType={userType} />
+      <CustomerRoute
+        exact
+        path="/create-requests"
+        component={CreateRequest}
+        userType={userType}
+        clearLocalStorage={clearLocalStorage}
+      />
       <AuthenticatedRoute exact path="/requests" component={CustomerRequests} userType={userType} />
       <SupportAgentRoute exact path="/support-agents/requests" component={SupportAgentRequests} userType={userType} />
       <AuthenticatedRoute exact path="/requests/:id" component={SingleRequest} userType={userType} />

@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
 import './App.css';
 
 import Main from "./components/main";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
+import * as sessionActions from '../src/actions/sessionActions';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       userType: localStorage.getItem('userType'),
@@ -15,6 +18,14 @@ class App extends Component {
     };
 
     this.updateStorageEntry = this.updateStorageEntry.bind(this);
+    this.clearLocalStorage = this.clearLocalStorage.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.actions.fetchSession()
+      .catch(() => {
+        this.clearLocalStorage();
+      });
   }
 
   updateStorageEntry(entry) {
@@ -22,6 +33,15 @@ class App extends Component {
       [entry]: localStorage.getItem(entry)
     })
   }
+
+  clearLocalStorage() {
+    localStorage.clear();
+    this.setState({
+      isLoggedIn: localStorage.getItem('isLoggedIn'),
+      userType: localStorage.getItem('userType'),
+    })
+  }
+
   render() {
     const { userType, isLoggedIn } = this.state;
     return (
@@ -32,6 +52,7 @@ class App extends Component {
             userType={userType}
             isLoggedIn={isLoggedIn}
             updateLocalStorageEntry={this.updateStorageEntry}
+            clearLocalStorage={this.clearLocalStorage}
           />
         </div>
         <Footer/>
@@ -40,4 +61,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(sessionActions, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);
