@@ -12,16 +12,12 @@ export function loginFailure(message) {
   return { type: 'LOGIN_FAILURE', message }
 }
 
-export function signupFailure() {
-  return { type: 'SIGNUP_FAILURE' }
+export function signupFailure(message) {
+  return { type: 'SIGNUP_FAILURE', message }
 }
 
 export function logoutSuccess() {
   return { type: 'LOGOUT_SUCCESS' }
-}
-
-export function userLoggedIn(status) {
-  return { type: 'USER_LOGGED_IN', status }
 }
 
 export function login(type, user) {
@@ -37,7 +33,6 @@ export function login(type, user) {
         dispatch(loginSuccess());
       })
       .catch((error) => {
-        console.log(error.response)
         const { data: { message } } = error.response;
         localStorage.setItem('isLoggedIn', false);
         dispatch(loginFailure(message));
@@ -49,19 +44,16 @@ export function signup(type, user) {
   return (dispatch) => {
     return AuthApi.signup(type, user)
       .then((response) => {
-        console.log(response)
-        const { data: { user } } = response;
-        localStorage.setItem('sessionId', user.session.id);
-        localStorage.setItem('userId', user.session.user_id);
-        localStorage.setItem('userType', user.session.role);
+        const { data: { user }, extra } = response;
+        localStorage.setItem('sessionId', extra.session_id);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userType', user.role);
         localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('expiresAt', user.session.expires_at);
+        localStorage.setItem('expiresAt', extra.expires_at);
         dispatch(signupSuccess(user));
       })
       .catch((error) => {
-        const errors = {};
-        console.log(error.response)
-        // const { data: { errors } } = error.response;
+        const { data: { errors } } = error.response;
         let message = '';
         Object.entries(errors[0]).forEach(([key, value]) => {
           message += `${key} ${value[0]} \n`;
@@ -75,18 +67,7 @@ export function signup(type, user) {
 
 export function logout() {
   return (dispatch) => {
-    localStorage.removeItem('sessionId');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userType');
-    localStorage.removeItem('isLoggedIn');
+    localStorage.clear();
     dispatch(logoutSuccess());
   }
-}
-
-export function loggedIn() {
-    return (dispatch) => {
-      const loggedIn = localStorage.getItem('loggedIn');
-      console.log(loggedIn)
-      dispatch(userLoggedIn(loggedIn))
-    }
 }

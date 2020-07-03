@@ -37,7 +37,6 @@ class CreateRequest extends Component {
           history.push('/');
         })
         .catch((error) => {
-          console.log(error.response)
           const { response: { status } } = error;
           if (status === 404) {
             this.props.clearLocalStorage();

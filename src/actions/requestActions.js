@@ -33,7 +33,6 @@ export function create(request) {
       })
       .catch((error) => {
         const { data: { errors } } = error.response;
-        console.log(errors);
         let message = '';
         Object.entries(errors[0]).forEach(([key, value]) => {
           message += `${key} ${value}\n`;

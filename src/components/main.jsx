@@ -58,7 +58,16 @@ const Main = ({ userType, isLoggedIn, clearLocalStorage, updateLocalStorageEntry
            />
          )}
       />
-      <Route exact path="/signup" component={CustomerSignup} />
+      <Route
+        exact
+        path="/signup"
+         render={(props) => (
+           <CustomerSignup
+             {...props}
+             updateLocalStorageEntry={updateLocalStorageEntry}
+           />
+         )}
+      />
       <Route exact path="/support-agents/login" component={SupportAgentLogin} />
       <Route exact path="/admins/login" component={AdminLogin} />
       <CustomerRoute

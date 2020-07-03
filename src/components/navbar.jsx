@@ -16,14 +16,6 @@ class Navbar extends Component {
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.props.actions.fetchSession()
-  //     .catch(() => {
-  //       this.props.updateLocalStorageEntry('userType')
-  //       localStorage.clear()
-  //     })
-  // }
-
   toggleCollapse() {
     this.setState({ collapsed: !this.state.collapsed });
   }
@@ -46,9 +38,9 @@ class Navbar extends Component {
     return (
       <div id="navbar-section">
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             Ticketyyyy
-          </a>
+          </Link>
           <button
             className={togglerClasses}
             type="button"
