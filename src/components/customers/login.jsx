@@ -21,6 +21,14 @@ class CustomerLogin extends Component {
     this.login = this.login.bind(this);
   }
 
+  static getDerivedStateFromProps(props) {
+    if (props.authenticated) {
+      props.updateLocalStorageEntry('userType')
+      props.updateLocalStorageEntry('isLoggedIn');
+    }
+    return {}
+  }
+
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({
@@ -31,10 +39,10 @@ class CustomerLogin extends Component {
   login(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    const customer = { auth: { email, password } };
+    const customer = { email, password };
     this.setState(loginFormValidator);
     if (this.validForm) {
-      this.props.actions.login('customers', customer)
+      this.props.actions.login('customers', customer);
     }
   }
 

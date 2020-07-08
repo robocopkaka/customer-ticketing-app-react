@@ -6,7 +6,10 @@ dotenv.config();
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
+  headers: {
+    'session_id': `${localStorage.sessionId}`,
+    'Content-Type': 'application/json'
+  }
 });
 
 export default instance;

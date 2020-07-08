@@ -5,7 +5,7 @@ class SupportAgentApi {
     return axios.get(`/support_agents`, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
+        'session_id': `${localStorage.sessionId}`
       }
     })
       .then(response => response.data);

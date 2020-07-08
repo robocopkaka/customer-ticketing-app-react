@@ -36,6 +36,12 @@ class CreateRequest extends Component {
         .then(() => {
           history.push('/');
         })
+        .catch((error) => {
+          const { response: { status } } = error;
+          if (status === 404) {
+            this.props.clearLocalStorage();
+          }
+        })
     }
   }
 

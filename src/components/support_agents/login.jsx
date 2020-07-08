@@ -31,7 +31,7 @@ class SupportAgentLogin extends Component {
   login(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    const customer = { auth: { email, password } };
+    const customer = { email, password };
     this.setState(loginFormValidator);
     if (this.validForm) {
       this.props.actions.login('support_agents', customer)

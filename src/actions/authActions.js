@@ -1,45 +1,41 @@
-import decode from 'jwt-decode';
 import AuthApi from "../api/authApi";
 
 export function signupSuccess(data) {
   return { type: 'SIGNUP_SUCCESS', data }
 }
 
-export function loginSuccess(data) {
-  return { type: 'LOGIN_SUCCESS', data }
+export function loginSuccess() {
+  return { type: 'LOGIN_SUCCESS' }
 }
 
-export function loginFailure() {
-  return { type: 'LOGIN_FAILURE' }
+export function loginFailure(message) {
+  return { type: 'LOGIN_FAILURE', message }
 }
 
-export function signupFailure() {
-  return { type: 'SIGNUP_FAILURE' }
+export function signupFailure(message) {
+  return { type: 'SIGNUP_FAILURE', message }
 }
 
 export function logoutSuccess() {
   return { type: 'LOGOUT_SUCCESS' }
 }
 
-export function userLoggedIn(status) {
-  return { type: 'USER_LOGGED_IN', status }
-}
-
 export function login(type, user) {
   return (dispatch) => {
     return AuthApi.login(type, user)
       .then((response) => {
-        const decodedToken = decode(response.jwt);
-        const { sub } = decodedToken;
-        localStorage.setItem('token', response.jwt);
-        localStorage.setItem('userId', sub);
-        localStorage.setItem('userType', sub.substr(0, 4))
-        localStorage.setItem('isLoggedIn', true);
-        dispatch(loginSuccess(user));
+        const { data: { session } } = response;
+        localStorage.setItem('sessionId', session.id);
+        localStorage.setItem('userId', session.user_id);
+        localStorage.setItem('userType', session.role);
+        localStorage.setItem('isLoggedIn', session.active);
+        localStorage.setItem('expiresAt', session.expires_at);
+        dispatch(loginSuccess());
       })
-      .catch(() => {
+      .catch((error) => {
+        const { data: { message } } = error.response;
         localStorage.setItem('isLoggedIn', false);
-        dispatch(loginFailure());
+        dispatch(loginFailure(message));
       })
   }
 }
@@ -48,35 +44,30 @@ export function signup(type, user) {
   return (dispatch) => {
     return AuthApi.signup(type, user)
       .then((response) => {
-        const decodedToken = decode(response.extra.jwt);
-        const { sub } = decodedToken;
-        localStorage.setItem('token', response.jwt);
-        localStorage.setItem('userId', sub);
-        localStorage.setItem('userType', sub.substr(0, 4))
+        const { data: { user }, extra } = response;
+        localStorage.setItem('sessionId', extra.session_id);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userType', user.role);
         localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('expiresAt', extra.expires_at);
         dispatch(signupSuccess(user));
       })
-      .catch(() => {
+      .catch((error) => {
+        const { data: { errors } } = error.response;
+        let message = '';
+        Object.entries(errors[0]).forEach(([key, value]) => {
+          message += `${key} ${value[0]} \n`;
+        })
         localStorage.setItem('isLoggedIn', false);
-        dispatch(signupFailure());
+        dispatch(signupFailure(message));
+        throw error;
       })
   };
 }
 
 export function logout() {
   return (dispatch) => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userType');
-    localStorage.setItem('isLoggedIn', false);
+    localStorage.clear();
     dispatch(logoutSuccess());
   }
-}
-
-export function loggedIn() {
-    return (dispatch) => {
-      const loggedIn = localStorage.getItem('loggedIn');
-      console.log(loggedIn)
-      dispatch(userLoggedIn(loggedIn))
-    }
 }

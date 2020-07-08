@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import { bindActionCreators } from "redux";
 import classNames from "classnames";
 import * as actions from '../actions/authActions';
+import * as sessionActions from '../actions/sessionActions';
 import history from "../history";
 
 class Navbar extends Component {
@@ -15,10 +16,6 @@ class Navbar extends Component {
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
-  componentDidMount() {
-    this.props.actions.loggedIn();
-  }
-
   toggleCollapse() {
     this.setState({ collapsed: !this.state.collapsed });
   }
@@ -26,10 +23,11 @@ class Navbar extends Component {
   logout(event) {
     event.preventDefault();
     this.props.actions.logout();
+    this.props.updateLocalStorageEntry('isLoggedIn');
     history.push('/');
   }
   render() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const isLoggedIn = this.props.isLoggedIn === "true";
     const { collapsed } = this.state;
     const collapseClasses = classNames(
       'collapse', 'navbar-collapse', { 'show': collapsed }
@@ -40,9 +38,9 @@ class Navbar extends Component {
     return (
       <div id="navbar-section">
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             Ticketyyyy
-          </a>
+          </Link>
           <button
             className={togglerClasses}
             type="button"
@@ -109,7 +107,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(Object.assign({}, actions, sessionActions), dispatch)
   }
 }
 

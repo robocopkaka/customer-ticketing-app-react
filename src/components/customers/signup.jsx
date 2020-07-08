@@ -45,6 +45,7 @@ class CustomerSignup extends Component {
        this.props.actions.signup('customers', user)
          .then(() => {
            history.push('/')
+           this.props.updateLocalStorageEntry('isLoggedIn');
          })
      }
    }

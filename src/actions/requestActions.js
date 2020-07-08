@@ -4,8 +4,8 @@ export function createRequestSuccess(data) {
   return { type: 'CREATE_REQUEST_SUCCESS', data }
 }
 
-export function createRequestFailure() {
-  return { type: 'CREATE_REQUEST_FAILURE' }
+export function createRequestFailure(message) {
+  return { type: 'CREATE_REQUEST_FAILURE', message }
 }
 
 export function fetchRequestsSuccess(data) {
@@ -32,7 +32,13 @@ export function create(request) {
         return response
       })
       .catch((error) => {
-        dispatch(createRequestFailure())
+        const { data: { errors } } = error.response;
+        let message = '';
+        Object.entries(errors[0]).forEach(([key, value]) => {
+          message += `${key} ${value}\n`;
+        })
+        dispatch(createRequestFailure(message))
+        throw error;
       })
   }
 }

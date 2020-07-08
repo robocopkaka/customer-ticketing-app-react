@@ -13,7 +13,7 @@ export default function requestReducer(state=initialState.request, action) {
       return newState;
     case 'CREATE_REQUEST_FAILURE':
       newState = update(state, {
-        message: { $set: 'Request creation failed' }
+        message: { $set: action.message }
       });
       return newState;
     case 'FETCH_REQUESTS_SUCCESS':
