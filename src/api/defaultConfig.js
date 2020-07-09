@@ -7,7 +7,7 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 10000,
   headers: {
-    'session_id': `${localStorage.sessionId}`,
+    'session_id': `${localStorage.getItem('sessionId')}`,
     'Content-Type': 'application/json'
   }
 });

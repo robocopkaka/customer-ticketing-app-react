@@ -4,8 +4,7 @@ class SupportAgentApi {
   static fetchAgents() {
     return axios.get(`/support_agents`, {
       headers: {
-        'Content-Type': 'application/json',
-        'session_id': `${localStorage.sessionId}`
+        'session_id': `${localStorage.getItem('sessionId')}`
       }
     })
       .then(response => response.data);
@@ -14,8 +13,7 @@ class SupportAgentApi {
   static assignRequest(agentId, reqId) {
     return axios.patch(`/support_requests/${reqId}/assign`, { assignee_id: agentId }, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
+        'session_id': `${localStorage.getItem('sessionId')}`
       }
     })
       .then(response => response.data);
