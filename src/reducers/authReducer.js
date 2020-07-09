@@ -19,8 +19,7 @@ export default function authReducer(state = initialState.auth, action) {
     case 'SIGNUP_SUCCESS':
       newState = update(state, {
         authenticated: { $set: true },
-        currentUser: { $set: action.data },
-        message: { $set: 'Logged in successfully' }
+        message: { $set: 'Signed up successfully' }
       });
       return newState;
     case 'SIGNUP_FAILURE':
