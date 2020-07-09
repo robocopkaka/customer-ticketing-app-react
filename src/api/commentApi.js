@@ -4,8 +4,7 @@ class CommentApi {
   static create(id, body) {
     return axios.post(`/support_requests/${id}/comments`, body, {
       headers: {
-        'Content-Type': 'application/json',
-        'session_id': `${localStorage.sessionId}`
+        'session_id': `${localStorage.getItem('sessionId')}`
       }
     })
       .then(response => response.data)
@@ -17,8 +16,7 @@ class CommentApi {
   static fetchComments(id) {
     return axios.get(`/support_requests/${id}/comments`, {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
+        'session_id': `${localStorage.getItem('sessionId')}`
       }
     })
       .then(response => response.data)
