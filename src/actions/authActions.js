@@ -33,6 +33,11 @@ export function login(type, user) {
         dispatch(loginSuccess());
       })
       .catch((error) => {
+        if (error.response === undefined ) {
+          localStorage.setItem('isLoggedIn', false);
+          dispatch(loginFailure(error.message));
+          return
+        }
         const { data: { message } } = error.response;
         localStorage.setItem('isLoggedIn', false);
         dispatch(loginFailure(message));
@@ -53,6 +58,11 @@ export function signup(type, user) {
         dispatch(signupSuccess(user));
       })
       .catch((error) => {
+        if (error.response === undefined ) {
+          localStorage.setItem('isLoggedIn', false);
+          dispatch(loginFailure(error.message));
+          return
+        }
         const { data: { errors } } = error.response;
         let message = '';
         Object.entries(errors[0]).forEach(([key, value]) => {
