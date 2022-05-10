@@ -1,11 +1,21 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7da7693a-c38b-4ce7-9f81-1239b8097773/deploy-status)](https://app.netlify.com/sites/hopeful-spence-9db445/deploys)
 
+## Description
+> This is the UI for a simple customer support system. Customers can make requests that support agents can then attend to.
+> Both customers and support agents can leave comments on a request until it is closed.
+>
+> Admins assign requests to support agents as they come in and there's a functionality
+> to support exports of support requests.
+
+## Hosted application
+> https://hopeful-spence-9db445.netlify.app/
+
 ## Prerequisites
 * Yarn
 * Node -  10.19.0
 
 ## Installation
-* Unzip the folder and `cd` into this directory
+* Clone this repository and `cd` into the directory
 * Run  `yarn install` to install all dependencies
 
 ## Available Scripts
@@ -28,10 +38,6 @@ You will also see any lint errors in the console.
 * [Requests - http://localhost:3000/requests](http://localhost:3000/requests)
 * [Create Request - http://localhost:3000/create-request](http://localhost:3000/create-request)
 
-## Challenges
-* Couldn't write tests
-* A few parts of the navigation are clunky
-* Couldn't display toasts messages to notify users of actions
 
 
 
